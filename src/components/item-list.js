@@ -1,16 +1,17 @@
-import { useState, memo } from 'react';
+import { useState, memo, useContext } from 'react';
 import { filterItems } from '../lib/items';
 import { toKebabCase } from '../lib/kebab-case';
 import Item from './item';
-
-const EmptyState = ({ id, items, filteredItems }) => (
+import { useActions } from '../hooks';
+const EmptyState = ({ id }) => (
   <p id={id} className="text-primary-400">
     (No items.)
   </p>
 );
 
-const ItemList = ({ title = 'Items', items, dispatch }) => {
+const ItemList = ({ title = 'Items', items }) => {
   const [filter, setFilter] = useState('');
+  const dispatch = useActions();
   const id = toKebabCase(title);
 
   const filteredItems = filterItems(items, { name: filter });
