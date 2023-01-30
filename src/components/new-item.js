@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { memo } from 'react';
-const NewItem = ({ addItem }) => {
+import { add } from '../lib/reducer';
+const NewItem = ({ dispatch }) => {
   const [newItemName, setNewItemName] = useState('');
   return (
     <form
       id="new-item"
       onSubmit={(e) => {
         e.preventDefault();
-        addItem(newItemName);
+        dispatch(add(newItemName));
         setNewItemName('');
       }}
     >
